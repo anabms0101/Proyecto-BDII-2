@@ -1,0 +1,24 @@
+create schema Datamart;
+
+create table Datamart.Sucursal (
+	id_sucursal int primary key not null unique,
+	gerente int not null);
+
+create table Datamart.Pelicula(
+	id_pelicula int primary key not null unique,
+	titulo text not null
+);
+
+create table Datamart.lugar (
+	id_lugar int primary key not null DEFAULT nextval('store_store_id_seq'::regclass),
+	direccion text not null,
+	ciudad text not null,
+	pais text not null
+);
+
+create table Datamart.fecha (
+	Fecha date primary key not null unique,
+	dia int not null CHECK (dia >= 1 AND dia <= 31),
+	mes int not null CHECK (mes >= 1 AND mes <= 12),
+	anio int not null
+);
