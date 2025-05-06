@@ -31,3 +31,25 @@ BEGIN
 END;
 $$;
 
+
+
+CREATE FUNCTION buscar_pelicula(titulo TEXT)
+RETURNS TEXT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    mensaje TEXT;
+    id1 INT;
+    descr TEXT;
+    anio INT;
+BEGIN
+    SELECT film_id, description, release_year
+    INTO id1, descr, anio
+    FROM film
+    WHERE title = titulo;
+
+    mensaje := 'El id de este film es: ' || id1 || ', ' || descr || ', su año de lanzamiento es: ' || anio;
+
+    RETURN mensaje;
+END;
+$$;
