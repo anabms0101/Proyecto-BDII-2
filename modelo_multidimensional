@@ -22,3 +22,42 @@ create table Datamart.fecha (
 	mes int not null CHECK (mes >= 1 AND mes <= 12),
 	anio int not null
 );
+
+
+CREATE OR REPLACE PROCEDURE InsertDateToDatamart()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    fecha_val DATE;
+BEGIN
+    FOR fecha_val IN SELECT DISTINCT rental_date FROM rental LOOP
+        BEGIN
+            INSERT INTO DATAMART.fecha (fecha, dia, mes, anio)
+            VALUES (
+                fecha_val,
+                EXTRACT(DAY FROM fecha_val),
+                EXTRACT(MONTH FROM fecha_val),
+                EXTRACT(YEAR FROM fecha_val)
+            )
+            ON CONFLICT (fecha) DO NOTHING;
+        END;
+    END LOOP;
+END;
+$$;
+
+call InsertDateToDatamart();
+
+
+
+
+CREATE OR REPLACE PROCEDURE InsertMovieToDatamart()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+insert into  DATAMART.pelicula (id_pelicula, titulo)
+	select film_id, title from film
+	on conflict do nothing;
+END;
+$$;
+
+call InsertMovieToDatamart();
