@@ -74,9 +74,21 @@ END;
 $$;
 
 
-
-
 create role EMP;
 grant execute on procedure registrar_alquiler to EMP;
 grant execute on procedure registrar_devolucion to EMP;
 grant execute on function buscar_pelicula to EMP;
+
+CREATE ROLE ADMIN IN ROLE EMP;
+
+CREATE ROLE video NOLOGIN;
+
+SET ROLE video;
+
+GRANT EXECUTE ON PROCEDURE insertar_cliente TO ADMIN;
+
+CREATE USER empleado1 PASSWORD 'empleado1234';
+GRANT EMP TO empleado1;
+
+CREATE USER administrador1 PASSWORD 'admin1234';
+GRANT ADMIN TO administrador1;
