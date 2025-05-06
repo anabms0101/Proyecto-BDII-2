@@ -1,5 +1,6 @@
 CREATE OR REPLACE PROCEDURE insertar_cliente(store_id INT, nombre TEXT, apellido TEXT, email TEXT, address_id INT, active INT)
 LANGUAGE plpgsql
+SECURITY DEFINER
 AS $$
 BEGIN
     IF EXISTS (SELECT 1 FROM store s WHERE s.store_id = insertar_cliente.store_id) THEN
@@ -16,6 +17,7 @@ $$;
 
 CREATE OR REPLACE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, staff_id int)
 LANGUAGE plpgsql
+SECURITY DEFINER
 AS $$
 DECLARE
     cust_id int;
@@ -29,6 +31,7 @@ $$;
 
 CREATE OR REPLACE PROCEDURE registrar_devolucion(rental_id int, return_date date)
 LANGUAGE plpgsql
+SECURITY DEFINER
 AS $$
 BEGIN
     UPDATE rental
@@ -41,8 +44,8 @@ $$;
 
 CREATE OR REPLACE FUNCTION buscar_pelicula(titulo TEXT)
 RETURNS TEXT
-SECURITY DEFINER
 LANGUAGE plpgsql
+SECURITY DEFINER
 AS $$
 DECLARE
     mensaje TEXT;
