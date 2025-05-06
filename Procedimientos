@@ -59,3 +59,10 @@ BEGIN
     RETURN mensaje;
 END;
 $$;
+
+
+
+create role EMP;
+grant execute on procedure registrar_alquiler to EMP;
+grant execute on procedure registrar_devolucion to EMP;
+grant execute on function buscar_pelicula to EMP;
