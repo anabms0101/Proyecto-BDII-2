@@ -1,4 +1,4 @@
-CREATE PROCEDURE insertar_usuario(store_id int,nombre TEXT, apellido text,  email TEXT, address_id int, active int)
+CREATE PROCEDURE insertar_cliente(store_id int,nombre TEXT, apellido text,  email TEXT, address_id int, active int)
 LANGUAGE plpgsql
 AS $$
 BEGIN
