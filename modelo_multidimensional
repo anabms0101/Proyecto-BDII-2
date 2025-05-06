@@ -61,3 +61,19 @@ END;
 $$;
 
 call InsertMovieToDatamart();
+
+
+CREATE OR REPLACE PROCEDURE InsertStoreToDatamart()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+insert into  DATAMART.lugar (direccion, ciudad, pais)
+	select a.address, c.city, o.country 
+	from address a
+	left join city c on a.city_id = c.city_id
+	left join country o on o.country_id = c.country_id
+	on conflict do nothing;
+END;
+$$;
+
+call InsertStoreToDatamart();
