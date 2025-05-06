@@ -1,11 +1,13 @@
-CREATE PROCEDURE insertar_cliente(store_id int,nombre TEXT, apellido text,  email TEXT, address_id int, active int)
+CREATE OR REPLACE PROCEDURE insertar_cliente(store_id int,nombre TEXT, apellido text,  email TEXT, address_id int, active int)
 LANGUAGE plpgsql
 AS $$
 BEGIN
     INSERT INTO customer(store_id, first_name, last_name, email, address_id, active)
     VALUES (store_id, nombre, apellido, email, address_id, active);
+	RAISE NOTICE 'El cliente se ha incertado correctamente :)';
 END;
 $$;
+
 
 
 CREATE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, staff_id int)
