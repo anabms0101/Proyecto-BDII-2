@@ -8,14 +8,26 @@ END;
 $$;
 
 
-CREATE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, return_date date, staff_id int)
+CREATE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, staff_id int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
     cust_id int;
 BEGIN
 	select customer_id into cust_id from customer where first_name = nombre and last_name = apellido;
-    INSERT INTO rental(inventory_id, customer_id, return_date, staff_id)
-    VALUES (inventory_id, cust_id, return_date, staff_id);
+    INSERT INTO rental(inventory_id, customer_id, staff_id)
+    VALUES (inventory_id, cust_id, staff_id);
 END;
 $$;
+
+
+CREATE PROCEDURE registrar_devolucion(rental_id int, return_date date)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE rental
+    SET return_date = return_date
+    WHERE rental.rental_id = rental_id;
+END;
+$$;
+
