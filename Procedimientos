@@ -92,3 +92,24 @@ GRANT EMP TO empleado1;
 
 CREATE USER administrador1 PASSWORD 'admin1234';
 GRANT ADMIN TO administrador1;
+
+ALTER TABLE actor OWNER TO video;
+ALTER TABLE address OWNER TO video;
+ALTER TABLE category OWNER TO video;
+ALTER TABLE city OWNER TO video;
+ALTER TABLE country OWNER TO video;
+ALTER TABLE customer OWNER TO video;
+ALTER TABLE film OWNER TO video;
+ALTER TABLE film_actor OWNER TO video;
+ALTER TABLE film_category OWNER TO video;
+ALTER TABLE inventory OWNER TO video;
+ALTER TABLE language OWNER TO video;
+ALTER TABLE payment OWNER TO video;
+ALTER TABLE rental OWNER TO video;
+ALTER TABLE staff OWNER TO video;
+ALTER TABLE store OWNER TO video;
+
+ALTER PROCEDURE insertar_cliente(INT, TEXT, TEXT, TEXT, INT, INT) OWNER TO video;
+ALTER PROCEDURE registrar_alquiler(INT, TEXT, TEXT, INT) OWNER TO video;
+ALTER PROCEDURE registrar_devolucion(INT, DATE) OWNER TO video;
+ALTER FUNCTION buscar_pelicula(TEXT) OWNER TO video;
