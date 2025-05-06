@@ -39,7 +39,7 @@ $$;
 
 
 
-CREATE FUNCTION buscar_pelicula(titulo TEXT)
+CREATE OR REPLACE FUNCTION buscar_pelicula(titulo TEXT)
 RETURNS TEXT
 LANGUAGE plpgsql
 AS $$
