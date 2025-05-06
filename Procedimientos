@@ -14,7 +14,7 @@ $$;
 
 
 
-CREATE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, staff_id int)
+CREATE OR REPLACE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, staff_id int)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -27,7 +27,7 @@ END;
 $$;
 
 
-CREATE PROCEDURE registrar_devolucion(rental_id int, return_date date)
+CREATE OR REPLACE PROCEDURE registrar_devolucion(rental_id int, return_date date)
 LANGUAGE plpgsql
 AS $$
 BEGIN
