@@ -25,6 +25,9 @@ BEGIN
 	select customer_id into cust_id from customer where first_name = nombre and last_name = apellido;
     INSERT INTO rental(inventory_id, customer_id, staff_id)
     VALUES (inventory_id, cust_id, staff_id);
+EXCEPTION 
+	WHEN OTHERS THEN
+		RAISE NOTICE 'Alguno de los datos ingresado es incorrecto';
 END;
 $$;
 
@@ -37,6 +40,9 @@ BEGIN
     UPDATE rental
     SET return_date = return_date
     WHERE rental.rental_id = rental_id;
+EXCEPTION 
+	WHEN OTHERS THEN
+		RAISE NOTICE 'No existe el rental id ingresado';
 END;
 $$;
 
@@ -61,8 +67,12 @@ BEGIN
     mensaje := 'El id de este film es: ' || id1 || ', ' || descr || ', su año de lanzamiento es: ' || anio;
 
     RETURN mensaje;
+EXCEPTION 
+	WHEN OTHERS THEN
+		RAISE NOTICE 'No existe la película';
 END;
 $$;
+
 
 
 
