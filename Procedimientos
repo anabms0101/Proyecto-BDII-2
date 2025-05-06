@@ -6,3 +6,16 @@ BEGIN
     VALUES (store_id, nombre, apellido, email, address_id, active);
 END;
 $$;
+
+
+CREATE PROCEDURE registrar_alquiler(inventory_id int, nombre text, apellido text, return_date date, staff_id int)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    cust_id int;
+BEGIN
+	select customer_id into cust_id from customer where first_name = nombre and last_name = apellido;
+    INSERT INTO rental(inventory_id, customer_id, return_date, staff_id)
+    VALUES (inventory_id, cust_id, return_date, staff_id);
+END;
+$$;
