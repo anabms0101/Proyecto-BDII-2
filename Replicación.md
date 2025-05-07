@@ -21,8 +21,13 @@ host replication all 127.0.0.1/32 trust
 
 ## 4. Reiniciar el servidor maestro
 ```bash
-pg_ctl restart -D "C:\Program Files\PostgreSQL\17\data"
+pg_ctl restart -D "C:\Program Files\PostgreSQL\16\data"
 ```
+En caso de que de error, utilizar este comando:
+```bash
+pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start"
+```
+y posteriormente volver a correr el comando de arriba.
 
 ## 5. Crear la réplica:
 ```bash
@@ -53,6 +58,11 @@ Username:              postgres
 Password:              ***** (marcar "Save Password")  
 ```
 4. Hacer click en **Save**.
+
+## PRUEBAS:
+- En pgAdmin se puede conectar al servidor maestro (puerto 5432) y abrir una pestaña de query tool para ejecutar la siguiente consula y ver el estado de la réplica: `SELECT * FROM pg_stat_replication;`
+- En la réplica (puerto 5433) se puede ejecutar la siguiente consulta y si devuelve true, significa que esa instancia esá en modo réplica: `SELECT pg_is_in_recovery();
+`
 
 ### ℹ️ Notas
 - Al conectarse a este nuevo servidor se podrá observar que contiene la base de datos dvdrental con sus respectivas tablas.
