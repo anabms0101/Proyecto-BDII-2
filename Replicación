@@ -1,0 +1,45 @@
+PASOS PARA LA REPLICACIÓN:
+
+-- Crear un directorio para almacenar la réplica:
+mkdir C:\PostgreSQL\replica
+
+-- Buscar el archivo postgresql.conf en C:\Program Files\PostgreSQL\17\data y modificar las siguientes lineas del archivo:
+wal_level = replica
+max_wal_senders = 5
+wal_keep_size = 64MB
+archive_mode = on
+listen_addresses = 'localhost'
+
+-- Buscar el archivo pg_hba.conf en el mismo directorio y modificar
+la siguiente línea:
+host replication all 127.0.0.1/32 trust
+
+-- Reiniciar el servidor maestro
+pg_ctl restart -D "C:\Program Files\PostgreSQL\17\data"
+
+-- Crear la réplica:
+pg_basebackup -h localhost -p 5432 -U postgres -D "C:\PostgreSQL\replica" -Fp -Xs -P -R
+
+-- Buscar el archivo postgresql.conf en C:\PostgreSQL\replica y modificar las siguientes líneas:
+port = 5433
+hot_standby = on
+listen_addresses = 'localhost'
+
+-- Iniciar la réplica:
+pg_ctl -D "C:\PostgreSQL\replica" -o "-p 5433" start
+
+
+PARA VERIFICAR QUE LA RÉPLICA FUE CREADA HAY QUE CREAR UN NUEVO SERVIDOR EN pgAdmin4:
+-Click derecho en "Servers" -> Create -> Server
+-En la pestaña general ponerle nombre al servidor, ejemplo: Replica - 5433
+-En la pestaña connection específicar lo siguiente:
+    Host name/addres: localhost
+    Port: 5433
+    Maintenance database: dvdrental
+    Username: postgres
+    Password: ***** (Marcar la casilla "Save Password")
+-Hacer click en save.
+
+Al conectarse a este nuevo servidor se podrá observar que contiene la base de datos dvdrental con sus respectivas tablas.
+La réplica es solo para lectura, no se pueden hacer operaciones DDL como create, insert y updae.
+La réplica también se actualiza en tiempo real con los cambios del servidor maestro.
