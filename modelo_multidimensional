@@ -77,3 +77,16 @@ END;
 $$;
 
 call InsertPlaceToDatamart();
+
+
+CREATE OR REPLACE PROCEDURE InsertStoreToDatamart()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+insert into  DATAMART.sucursal (id_sucursal, gerente)
+	select store_id, manager_staff_id from store
+	on conflict do nothing;
+END;
+$$;
+
+call InsertStoreToDatamart();
