@@ -24,6 +24,22 @@ create table Datamart.fecha (
 );
 
 
+
+create table Datamart.Facts (
+	id int primary key not null DEFAULT nextval('store_store_id_seq'::regclass),
+	id_lugar int not null,
+	id_fecha date not null,
+	id_pelicula int not null,
+	id_sucursal int not null,
+	FOREIGN KEY (id_lugar) REFERENCES DATAMART.lugar(ID_lugar),
+	FOREIGN KEY (id_fecha) REFERENCES DATAMART.fecha(fecha),
+	FOREIGN KEY (id_sucursal) REFERENCES DATAMART.sucursal(id_sucursal),
+	FOREIGN KEY (id_pelicula) REFERENCES DATAMART.pelicula(id_pelicula),
+	num_alquileres int,
+	total_cobrado_alquiler int
+);
+
+
 CREATE OR REPLACE PROCEDURE InsertDateToDatamart()
 LANGUAGE plpgsql
 AS $$
@@ -90,3 +106,5 @@ END;
 $$;
 
 call InsertStoreToDatamart();
+
+
