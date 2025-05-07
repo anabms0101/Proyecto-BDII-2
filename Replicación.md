@@ -23,7 +23,7 @@ host replication all 127.0.0.1/32 trust
 ```bash
 pg_ctl restart -D "C:\Program Files\PostgreSQL\16\data"
 ```
-En caso de que de error, utilizar este comando:
+En caso de que dé error, utilizar este comando:
 ```bash
 pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start"
 ```
@@ -61,7 +61,7 @@ Password:              ***** (marcar "Save Password")
 
 ## PRUEBAS:
 - En pgAdmin se puede conectar al servidor maestro (puerto 5432) y abrir una pestaña de query tool para ejecutar la siguiente consula y ver el estado de la réplica: `SELECT * FROM pg_stat_replication;`
-- En la réplica (puerto 5433) se puede ejecutar la siguiente consulta y si devuelve true, significa que esa instancia esá en modo réplica: `SELECT pg_is_in_recovery();
+- En la réplica (puerto 5433) se puede ejecutar la siguiente consulta y si devuelve true, significa que esa instancia está en modo réplica: `SELECT pg_is_in_recovery();
 `
 
 ### ℹ️ Notas
