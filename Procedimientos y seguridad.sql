@@ -1,4 +1,4 @@
--- 1. Procedimientos y funciones
+-- 1.1 Procedimientos y funciones
 CREATE OR REPLACE PROCEDURE insertar_cliente(store_id INT, nombre TEXT, apellido TEXT, email TEXT, address_id INT, active INT)
 LANGUAGE plpgsql
 SECURITY DEFINER
@@ -74,7 +74,7 @@ EXCEPTION
 END;
 $$;
 
--- 2. Seguridad
+-- 1.2 Seguridad
 create role EMP;
 grant execute on procedure registrar_alquiler to EMP;
 grant execute on procedure registrar_devolucion to EMP;
