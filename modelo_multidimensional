@@ -63,7 +63,7 @@ $$;
 call InsertMovieToDatamart();
 
 
-CREATE OR REPLACE PROCEDURE InsertStoreToDatamart()
+CREATE OR REPLACE PROCEDURE InsertPlaceToDatamart()
 LANGUAGE plpgsql
 AS $$
 BEGIN
@@ -76,4 +76,4 @@ insert into  DATAMART.lugar (direccion, ciudad, pais)
 END;
 $$;
 
-call InsertStoreToDatamart();
+call InsertPlaceToDatamart();
