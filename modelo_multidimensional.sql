@@ -108,3 +108,33 @@ $$;
 call InsertStoreToDatamart();
 
 
+CREATE OR REPLACE PROCEDURE InsertFactsToDatamart()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO DATAMART.Facts (id_lugar, id_fecha, id_pelicula, id_sucursal, num_alquileres, total_cobrado_alquiler)
+    SELECT
+        l.id_lugar,
+        f.fecha,
+        p.id_pelicula,
+        s.id_sucursal,
+        COUNT(r.rental_id),
+        SUM(pa.amount)
+    FROM Datamart.Fecha f
+    LEFT JOIN rental r ON f.fecha = r.rental_date::date
+    LEFT JOIN inventory i ON i.inventory_id = r.inventory_id
+    LEFT JOIN Datamart.pelicula p ON p.id_pelicula = i.film_id
+    LEFT JOIN Datamart.sucursal s ON i.store_id = s.id_sucursal
+    LEFT JOIN store st ON st.store_id = s.id_sucursal
+    LEFT JOIN address a ON a.address_id = st.address_id
+    LEFT JOIN city c ON c.city_id = a.city_id
+    LEFT JOIN country y ON c.country_id = y.country_id
+    RIGHT JOIN Datamart.lugar l ON l.direccion = a.address AND l.ciudad = c.city AND l.pais = y.country
+    JOIN payment pa ON pa.rental_id = r.rental_id
+    GROUP BY
+        l.id_lugar, f.fecha, p.id_pelicula, s.id_sucursal;
+END;
+$$;
+
+
+call InsertFactsToDatamart();
