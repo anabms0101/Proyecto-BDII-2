@@ -60,7 +60,7 @@ Password:              ***** (marcar "Save Password")
 4. Hacer click en **Save**.
 
 ## PRUEBAS:
-- En pgAdmin se puede conectar al servidor maestro (puerto 5432) y abrir una pestaña de query tool para ejecutar la siguiente consula y ver el estado de la réplica: `SELECT * FROM pg_stat_replication;`
+- En pgAdmin se puede conectar al servidor maestro (puerto 5432) y abrir una pestaña de query tool para ejecutar la siguiente consulta y ver el estado de la réplica: `SELECT * FROM pg_stat_replication;`
 - En la réplica (puerto 5433) se puede ejecutar la siguiente consulta y si devuelve true, significa que esa instancia está en modo réplica: `SELECT pg_is_in_recovery();
 `
 
