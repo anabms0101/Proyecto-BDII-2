@@ -25,7 +25,7 @@ pg_ctl restart -D "C:\Program Files\PostgreSQL\16\data"
 ```
 En caso de que dé error, utilizar este comando:
 ```bash
-pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start"
+pg_ctl -D "C:\Program Files\PostgreSQL\16\data" start
 ```
 y posteriormente volver a correr el comando de arriba.
 
