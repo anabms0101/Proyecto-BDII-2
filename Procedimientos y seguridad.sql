@@ -26,6 +26,7 @@ BEGIN
 	select customer_id into cust_id from customer where first_name = nombre and last_name = apellido;
     INSERT INTO rental(inventory_id, customer_id, staff_id)
     VALUES (inventory_id, cust_id, staff_id);
+	RAISE NOTICE 'El alquiler se ha insertado correctamente :)';
 EXCEPTION 
 	WHEN OTHERS THEN
 		RAISE NOTICE 'Alguno de los datos ingresado es incorrecto';
