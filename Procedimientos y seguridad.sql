@@ -42,6 +42,7 @@ BEGIN
     UPDATE rental
     SET return_date = return_date
     WHERE rental.rental_id = rental_id;
+	RAISE NOTICE 'La devolución se ha insertado correctamente :)';
 EXCEPTION 
 	WHEN OTHERS THEN
 		RAISE NOTICE 'No existe el rental id ingresado';
