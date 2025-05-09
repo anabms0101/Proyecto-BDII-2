@@ -1,3 +1,36 @@
+SELECT 
+    f.id_sucursal,
+    fe.mes,
+    SUM(f.num_alquileres) AS total_alquileres,
+    SUM(f.total_cobrado_alquiler) AS total_monto_cobrado
+FROM 
+    datamart.facts f
+JOIN 
+    datamart.fecha fe ON f.id_fecha = fe.fecha
+GROUP BY 
+    f.id_sucursal,
+    fe.mes
+ORDER BY 
+    f.id_sucursal,
+    fe.mes;
+
+
+
+SELECT
+    f.anio AS Año,
+    f.mes AS Mes,
+    SUM(fa.total_cobrado_alquiler) AS Total_Alquiler
+FROM
+    datamart.facts fa
+INNER JOIN
+    datamart.fecha f ON fa.id_fecha = f.fecha
+GROUP BY
+    f.anio, f.mes
+ORDER BY
+    f.anio, f.mes;
+
+
+
 
 WITH actor_rentals AS (
     SELECT 
